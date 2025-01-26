@@ -26,22 +26,18 @@ colorSchema: light
 # TypeScript <br /> the Bad Parts
 
 ---
-layout: two-cols
+layout: intro
 ---
-# Who am I?
+# [Benoit Lemoine](https://ca.linkedin.com/in/benoit-lemoine-b63766a0)
 
-* [Benoit Lemoine](https://ca.linkedin.com/in/benoit-lemoine-b63766a0)
+<img src="./img/Moloch.jpg" class="w-50 ml-10 border float-right"  />
+
 * Tech lead (manager) at [Busbud](https://busbud.com/)
 * Co-organizer of [Montreal TypeScript Meetup](https://www.meetup.com/typescript-montreal/)
 
-::right::
-
-<img src="./img/Moloch.jpg" class="w-50 ml-10 border"  />
-
-
 ---
 
-# The goal of TypeScript
+# The goals of TypeScript
 
 
 <v-clicks>
@@ -86,7 +82,6 @@ class: text-center
 
 # Soundness
 
-
 ---
 
 ## TypeScript is unsound...
@@ -97,7 +92,7 @@ class: text-center
 * `sound`: all incorrect programs are rejected
 * `unsound`: some incorrect programs compiles without any errors
 * TypeScript is unsound _by design_
-* Knowing the source of the unsoundness becomes crucial for developers to trust the language
+* Knowing the source of the unsoundness becomes crucial for trusting the language
 
 </v-clicks>
 
@@ -107,9 +102,13 @@ class: text-center
 
 In your `tsconfig.json` file, ensure that:
 
-* `strict: true` should be mandatory
-* Lots of option to improve type checking: https://www.typescriptlang.org/tsconfig/#Type_Checking_6248
+<v-clicks>
+
+* `strict: true` is set - by default on new project
+* Lots of options to improve type checking: https://www.typescriptlang.org/tsconfig/#Type_Checking_6248
 * new options are regularly added
+
+</v-clicks>
 
 ---
 layout: center
@@ -124,6 +123,14 @@ class: text-center
 ## Null Checks
 
 ````md magic-move
+
+```typescript
+
+const text: string = null;
+
+text.slice(0, 1);
+
+```
 
 ```typescript
 
@@ -155,8 +162,10 @@ text?.slice(0, 1);
 
 ````
 
+<span v-click>`strictNullChecks` is included in `strict`</span>
+
 ---
-zoom: 0.97
+zoom: 0.91
 ---
 
 ## `any`
@@ -164,12 +173,26 @@ zoom: 0.97
 <v-clicks>
 
 
-* `any` can be set in anything : `const a: string = true as any`
-* anything can be set in `any`: `const a: any = 1;`
+* `any` can be set in anything and anything can be set in `any`
 * `any` is a way to say to the compiler _"I know better than you"_
 * exists historically to help with JS codebase migration
 
 </v-clicks>
+
+<v-click>
+
+```typescript
+const a: string = true as any;
+const b: any = 1;
+
+// Runtime error -> getName is not a function
+a.getName();
+b.getName();
+
+```
+
+</v-click>
+
 
 
 <span class="text-2xl" v-click>don't use `any` </span><span class="text-2xl" v-click>, unless you're 100% sure you can't use a proper type</span>
@@ -390,14 +413,14 @@ zoom: 0.95
 ```typescript
 import * as z from 'zod';
 
-const dog_schema = z.object({ name: z.string() })
+const Dog = z.object({ name: z.string() })
 
-type Dog = z.infer<typeof dog_schema>;
+type Dog = z.infer<typeof Dog>;
 //   ^?  { name: string }
 
 const foo: unknown = JSON.parse("1");
 
-const validated_foo = dog_schema.safe_parse(foo);
+const validated_foo = Dog.safe_parse(foo);
 if(validated_foo.success) {
     console.log(validated_foo.name)
 }
@@ -438,6 +461,8 @@ const dogs: Array<Dog> = []
 if (dogs[0]) {
   console.log(dogs[0].name)
 }
+// or
+console.log(dogs[0]?.name)
 ```
 
 ````
@@ -1019,6 +1044,9 @@ console.log(NS.a_value);
 
 ````
 
+
+
+
 ---
 
 ## TypeScript is Structurally Typed <span v-click="2"> - Except when it's not</span>
@@ -1067,9 +1095,6 @@ zoom: 0.9
 ---
 
 ## Service Pattern
-
-
-
 
 
 ````md magic-move
@@ -1305,7 +1330,7 @@ function getName(dog) {
 * Activate `strict` options in `tsconfig.json`
 * Chose a syntax and stick to it
 * Even with (mostly historical) quirks, TypeScript is still quite good
-* and has actually a very powerful TypeSystem
+
 
 ---
 layout: center
