@@ -92,7 +92,7 @@ class: text-center
 * `sound`: all incorrect programs are rejected
 * `unsound`: some incorrect programs compiles without any errors
 * TypeScript is unsound _by design_
-* Knowing the source of the unsoundness becomes crucial for trusting the language
+* Knowing the source of the unsoundness becomes crucial to trust the language
 
 </v-clicks>
 
@@ -109,6 +109,19 @@ In your `tsconfig.json` file, ensure that:
 * new options are regularly added
 
 </v-clicks>
+
+
+---
+
+## Why is _soundness_ important?
+
+<v-click>
+
+The earlier a defect is found, the easier it is too fix
+
+</v-click>
+
+// TODO chart 
 
 ---
 layout: center
@@ -347,7 +360,7 @@ zoom: 0.9
 
 ## Type Guards
 
-A way to do a more type safe cast.
+A way to do a type safe cast
 
 
 ````md magic-move
@@ -1043,177 +1056,6 @@ console.log(NS.a_value);
 ```
 
 ````
-
-
-
-
----
-
-## TypeScript is Structurally Typed <span v-click="2"> - Except when it's not</span>
-
-
-````md magic-move
-
-```ts
-class Dog {
-   constructor(public name:string){}
-}
-
-const dog: Dog = { name: 'Sif'};
-```
-
-```ts
-class Dog {
-   constructor(public name:string){}
-}
-
-class Cat {
-   constructor(public name:string){}
-}
-
-const dog: Dog = new Cat('Sif');
-```
-
-```ts
-class Dog {
-   constructor(private name:string){}
-}
-
-class Cat {
-   constructor(private name:string){}
-}
-
-const dog: Dog = new Cat('Sif');
-// Type 'Cat' is not assignable to type 'Dog'.
-//   Types have separate declarations of a private property 'name'.
-```
-
-````
-
----
-zoom: 0.9
----
-
-## Service Pattern
-
-
-````md magic-move
-
-```ts
-
-class UserService {
-    constructor(private repository: UserRepository) {}
-    getName(): string { return this.repository.getName(); }
-}
-
-class UserController {
-    constructor(private service: UserService) {}
-    getName(): string { return this.service.getName(); }
-}
-
-
-```
-
-```ts
-
-
-class UserService {
-    constructor(private repository: UserRepository) {}
-    getName(): string { return this.repository.getName(); }
-}
-
-class UserController {
-    constructor(private service: UserService) {}
-    getName(): string { return this.service.getName(); }
-}
-
-// In tests
-
-const fakeUserService: UserService = {  getName() { return ''; } }
-const controller = new UserController(fakeUserService)
-
-```
-
-```ts
-
-
-class UserService {
-    constructor(private repository: UserRepository) {}
-    getName(): string { return this.repository.getName(); }
-}
-
-class UserController {
-    constructor(private service: UserService) {}
-    getName(): string { return this.service.getName(); }
-}
-
-// In tests
-// Property 'repository' is missing in type '{ getName(): string; }' 
-//   but required in type 'UserService'.
-const fakeUserService: UserService = {  getName() { return ''; } }
-const controller = new UserController(fakeUserService)
-
-```
-
-```ts
-
-interface UserService {
-  getName(): string
-}
-class UserServiceImpl implements UserService {
-    constructor(private repository: UserRepository) {}
-    getName(): string { return this.repository.getName(); }
-}
-
-class UserController {
-    constructor(private service: UserService) {}
-    getName(): string { return this.service.getName(); }
-}
-
-// In tests
-const fakeUserService: UserService = {  getName() { return ''; } }
-const controller = new UserController(fakeUserService)
-
-```
-
-
-
-```ts
-
-type PublicInterface<T> = {
-  [K in keyof T]: T[K] extends new (...args: unknown[]) => unknown ? never : T[K];
-};
-class UserServiceImpl {
-    constructor(private repository: UserRepository) {}
-    getName(): string { return this.repository.getName(); }
-}
-type UserService = PublicInterface<UserServiceImpl>
-
-class UserController {
-    constructor(private service: UserService) {}
-    getName(): string { return this.service.getName(); }
-}
-
-// In tests
-const fakeUserService: UserService = {  getName() { return ''; } }
-const controller_under_test = new UserController(fakeUserService)
-
-```
-
-````
-
-
-
---- 
-
-## End Note on Structural Typing
-
-<v-clicks>
-
-* If you want to be _sure_ your users are using your class, declare a private property. Even a fake one.
-
-
-</v-clicks>
 
 
 

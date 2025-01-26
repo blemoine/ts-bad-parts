@@ -1,11 +1,5 @@
-# Welcome to [Slidev](https://github.com/slidevjs/slidev)!
+# TypeScript: the bad parts
 
-To start the slide show:
 
-- `npm install`
-- `npm run dev`
-- visit <http://localhost:3030>
-
-Edit the [slides.md](./slides.md) to see the changes.
-
-Learn more about Slidev at the [documentation](https://sli.dev/).
+A presentation about some of the shortcoming of TypeScript.
+The slides can be seen [here: https://blemoine.github.io/ts-bad-parts](https://blemoine.github.io/ts-bad-parts)
