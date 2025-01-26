@@ -30,7 +30,7 @@ layout: intro
 ---
 # [Benoit Lemoine](https://ca.linkedin.com/in/benoit-lemoine-b63766a0)
 
-<img src="./img/Moloch.jpg" class="w-50 ml-10 border float-right"  />
+<img src="/img/Moloch.jpg" class="w-50 ml-10 border float-right"  />
 
 * Tech lead (manager) at [Busbud](https://busbud.com/)
 * Co-organizer of [Montreal TypeScript Meetup](https://www.meetup.com/typescript-montreal/)
