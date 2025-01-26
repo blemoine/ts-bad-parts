@@ -30,7 +30,7 @@ layout: intro
 ---
 # [Benoit Lemoine](https://ca.linkedin.com/in/benoit-lemoine-b63766a0)
 
-<img src="/img/Moloch.jpg" class="w-50 ml-10 border float-right"  />
+<img src="/img/Moloch.jpg" class="w-50 ml-10 border float-right" alt="Most beautiful animal in the world: Moloch Horridus, aka Thorny Devil"  />
 
 * Tech lead (manager) at [Busbud](https://busbud.com/)
 * Co-organizer of [Montreal TypeScript Meetup](https://www.meetup.com/typescript-montreal/)
@@ -1339,6 +1339,9 @@ class: text-center
 
 # Questions ?
 
-TODO link to the slides
 
+Slides: https://blemoine.github.io/ts-bad-parts
+
+<div class="flex justify-center"><img src="/img/QR-code.png" alt="" class="w-30 "  /></div>
+<br/>
 <PoweredBySlidev mt-10 />
