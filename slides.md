@@ -111,9 +111,13 @@ In your `tsconfig.json` file, ensure that:
 </v-clicks>
 
 
+
+---
+layout: two-cols
 ---
 
 ## Why is _soundness_ important?
+
 
 <v-click>
 
@@ -121,7 +125,15 @@ The earlier a defect is found, the easier it is too fix
 
 </v-click>
 
-// TODO chart 
+::right::
+
+<v-click at="1">
+
+<img class="w-59 border" src="/img/Cost.png" alt="chart showing that the cost increase exponentially the later an issue is found" />
+
+</v-click>
+
+
 
 ---
 layout: center
